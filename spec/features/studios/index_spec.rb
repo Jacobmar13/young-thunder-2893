@@ -32,9 +32,17 @@ RSpec.describe 'the Studio index page' do
   end
   it 'should display all studios' do
     visit '/studios'
-    save_and_open_page
+
     expect(page).to have_content(@warner.name)
     expect(page).to have_content(@lucasfilm.name)
     expect(page).to have_content(@disney.name)
+  end
+
+  it 'should display all movies for a studio' do
+    visit '/studios'
+
+    expect(page).to have_content(@raiders.title)
+    expect(page).to have_content(@temple_doom.title)
+    expect(page).to have_content(@last_crusade.title)
   end
 end
