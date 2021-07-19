@@ -29,10 +29,34 @@ RSpec.describe 'the Movie show page' do
       creation_year: 1989,
       genre: 'Action/Adventure'
     )
+    @h_ford = Actor.create!(
+      name: 'Harrison Ford',
+      age: 79
+    )
+    @k_allen = Actor.create!(
+      name: 'Karen Allen',
+      age: 69
+    )
+    @j_r_davies = Actor.create!(
+      name: 'John Rhys-Davies',
+      age: 77
+    )
+    MovieActor.create!(movie: @raiders, actor: @h_ford)
+    MovieActor.create!(movie: @raiders, actor: @k_allen)
+    MovieActor.create!(movie: @raiders, actor: @j_r_davies)
   end
   it "should display movie and it's attributes" do
     visit "/movies/#{@raiders.id}"
-    save_and_open_page
+
     expect(page).to have_content(@raiders.title)
+    expect(page).to have_content(@raiders.creation_year)
+    expect(page).to have_content(@raiders.genre)
+  end
+  it "should display actors in movie" do
+    visit "/movies/#{@raiders.id}"
+
+    expect(page).to have_content(@h_ford.name)
+    expect(page).to have_content(@k_allen.name)
+    expect(page).to have_content(@j_r_davies.name)
   end
 end
