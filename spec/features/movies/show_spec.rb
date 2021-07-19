@@ -52,11 +52,19 @@ RSpec.describe 'the Movie show page' do
     expect(page).to have_content(@raiders.creation_year)
     expect(page).to have_content(@raiders.genre)
   end
-  it "should display actors in movie" do
+  it 'should display actors in movie with their age' do
     visit "/movies/#{@raiders.id}"
-    save_and_open_page
+
     expect(page).to have_content(@h_ford.name)
+    expect(page).to have_content(@h_ford.age)
     expect(page).to have_content(@k_allen.name)
+    expect(page).to have_content(@k_allen.age)
     expect(page).to have_content(@j_r_davies.name)
+    expect(page).to have_content(@j_r_davies.age)
+  end
+  it 'should display average actor age' do
+    visit "/movies/#{@raiders.id}"
+
+    expect(page).to have_content((@h_ford.age + @k_allen.age + @j_r_davies.age)/3)
   end
 end
