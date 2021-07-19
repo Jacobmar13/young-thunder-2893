@@ -54,7 +54,7 @@ RSpec.describe 'the Movie show page' do
   end
   it "should display actors in movie" do
     visit "/movies/#{@raiders.id}"
-
+    save_and_open_page
     expect(page).to have_content(@h_ford.name)
     expect(page).to have_content(@k_allen.name)
     expect(page).to have_content(@j_r_davies.name)
